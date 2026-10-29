@@ -1,0 +1,455 @@
+/* ============================================================
+   Полина ❤ — романтический сайт
+   ============================================================ */
+
+:root{
+  --bg-1:#150a1c;
+  --bg-2:#2b1030;
+  --bg-3:#3c1230;
+  --rose:#ff7aa8;
+  --rose-deep:#e0447c;
+  --rose-soft:#ffc1d6;
+  --gold:#f7d4a1;
+  --text:#f8eefa;
+  --muted:#d7b4ca;
+  --card:rgba(255,255,255,.045);
+  --border:rgba(255,150,190,.22);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Montserrat',sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(1100px 620px at 82% -8%, rgba(224,68,124,.20), transparent 60%),
+    radial-gradient(900px 560px at 8% 108%, rgba(247,212,161,.10), transparent 60%),
+    linear-gradient(160deg, var(--bg-1) 0%, var(--bg-2) 55%, var(--bg-3) 100%);
+  background-attachment:fixed;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+::selection{background:var(--rose-deep);color:#fff}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:rgba(0,0,0,.25)}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--rose),var(--rose-deep));border-radius:8px}
+
+/* ---------- фоновые слои ---------- */
+#stars,#bgHearts{position:fixed;inset:0;pointer-events:none}
+#stars{z-index:0}
+#bgHearts{z-index:1;overflow:hidden}
+
+.star{
+  position:absolute;background:#fff;border-radius:50%;
+  opacity:.2;animation:twinkle 3s ease-in-out infinite;
+}
+@keyframes twinkle{
+  0%,100%{opacity:.12;transform:scale(.7)}
+  50%{opacity:.85;transform:scale(1.25)}
+}
+
+.fheart{
+  position:absolute;bottom:-80px;
+  animation:floatUp linear forwards;
+  will-change:transform,opacity;
+}
+@keyframes floatUp{
+  0%  {transform:translate(0,0) rotate(0deg);opacity:0}
+  8%  {opacity:1}
+  100%{transform:translate(var(--dx,0px),-115vh) rotate(var(--rot,20deg));opacity:0}
+}
+
+/* ---------- герой ---------- */
+.hero{
+  position:relative;z-index:2;
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:24px;
+}
+.hero-inner{display:flex;flex-direction:column;align-items:center;gap:12px}
+.hero-kicker{
+  text-transform:uppercase;letter-spacing:.5em;
+  font-size:.78rem;font-weight:500;color:var(--gold);
+}
+.hero-name{
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(4.6rem,15vw,10.5rem);
+  line-height:1.05;
+  background:linear-gradient(90deg,var(--gold) 0%,#ffb6cf 35%,var(--rose) 60%,var(--gold) 100%);
+  background-size:250% 100%;
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  filter:drop-shadow(0 6px 30px rgba(255,122,168,.35));
+  animation:flow 7s linear infinite;
+}
+@keyframes flow{to{background-position:250% 0}}
+.letter{display:inline-block}
+.l-in{display:inline-block;will-change:transform}
+
+.hero-typed{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:clamp(1.15rem,2.6vw,1.6rem);
+  color:var(--rose-soft);
+  min-height:2.2em;
+}
+.caret{color:var(--rose);margin-left:2px;animation:blink 1s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+
+.scroll-hint{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  font-size:.7rem;letter-spacing:.35em;text-transform:uppercase;color:var(--muted);
+}
+.scroll-hint .arrow{
+  display:block;text-align:center;font-size:1rem;margin-top:10px;
+  animation:bounce 1.7s ease-in-out infinite;
+}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(9px)}}
+
+/* ---------- секции ---------- */
+section{position:relative;z-index:2;max-width:1080px;margin:0 auto;padding:96px 22px}
+
+.section-title{
+  text-align:center;
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(3rem,7vw,4.8rem);
+  background:linear-gradient(90deg,var(--gold),var(--rose),var(--rose-soft),var(--gold));
+  background-size:300% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:flow 8s linear infinite;
+}
+.divider{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  margin:16px auto 0;
+}
+.divider::before,.divider::after{content:'';height:1px;width:74px}
+.divider::before{background:linear-gradient(90deg,transparent,var(--rose))}
+.divider::after{background:linear-gradient(90deg,var(--rose),transparent)}
+.divider i{
+  font-style:normal;color:var(--rose);font-size:1.1rem;
+  animation:beat 1.8s ease-in-out infinite;
+}
+@keyframes beat{
+  0%,100%{transform:scale(1)}
+  14%{transform:scale(1.3)}
+  28%{transform:scale(1)}
+  42%{transform:scale(1.22)}
+}
+
+/* ---------- цитата-герой ---------- */
+.quote-card{
+  position:relative;
+  max-width:760px;margin:0 auto;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:56px 48px;
+  text-align:center;
+  backdrop-filter:blur(8px);
+  box-shadow:0 24px 60px rgba(0,0,0,.35);
+}
+.quote-card p{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:clamp(1.4rem,2.8vw,2rem);line-height:1.65;
+}
+.quote-author{
+  margin-top:22px;font-size:.8rem;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--gold);
+}
+.qmark{
+  position:absolute;top:14px;left:26px;
+  font-size:4rem;line-height:1;
+  font-family:'Cormorant Garamond',serif;
+  color:var(--rose);opacity:.5;
+}
+.qmark-r{top:auto;left:auto;right:26px;bottom:-26px}
+
+/* ---------- карточки причин ---------- */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:24px;margin-top:56px;
+}
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:30px 26px;text-align:center;
+  backdrop-filter:blur(6px);
+  transition:transform .45s cubic-bezier(.2,.7,.3,1.4),border-color .45s,box-shadow .45s;
+}
+.card:hover{
+  transform:translateY(-10px);
+  border-color:rgba(255,150,190,.55);
+  box-shadow:0 22px 44px rgba(224,68,124,.22);
+}
+.card .icon{font-size:2.4rem;display:inline-block;transition:transform .45s}
+.card:hover .icon{transform:scale(1.25) rotate(-8deg)}
+.card h3{margin:16px 0 10px;font-size:1.12rem;font-weight:600;color:var(--gold)}
+.card p{font-size:.93rem;line-height:1.75;color:var(--muted)}
+
+/* ---------- большое сердце + счётчик ---------- */
+.heart-section{text-align:center}
+.heart-wrap{
+  position:relative;width:240px;height:240px;
+  margin:34px auto 8px;
+  display:flex;align-items:center;justify-content:center;
+}
+.heart-emoji{
+  font-size:140px;line-height:1;display:inline-block;
+  filter:drop-shadow(0 0 40px rgba(255,77,126,.6));
+  animation:heartbeat 1.5s ease-in-out infinite;
+}
+@keyframes heartbeat{
+  0%,100%{transform:scale(1)}
+  12%{transform:scale(1.15)}
+  24%{transform:scale(1.02)}
+  36%{transform:scale(1.12)}
+  55%{transform:scale(1)}
+}
+.orbit{
+  position:absolute;inset:-8px;
+  animation:spin 14s linear infinite;
+  pointer-events:none;
+}
+.orbit i{
+  position:absolute;font-style:normal;
+  color:var(--gold);font-size:15px;
+  animation:twinkle 2.4s ease-in-out infinite;
+}
+.orbit .o1{top:0;left:50%;transform:translateX(-50%)}
+.orbit .o2{bottom:10%;left:4%}
+.orbit .o3{bottom:10%;right:4%}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.counter-label{
+  display:inline-flex;align-items:center;gap:10px;
+  letter-spacing:.28em;text-transform:uppercase;
+  font-size:.7rem;color:var(--muted);
+}
+.live-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:#54e08b;box-shadow:0 0 12px #54e08b;
+  animation:blink 1.4s infinite;
+}
+.counter-num{
+  display:block;margin-top:14px;
+  font-family:'Cormorant Garamond',serif;font-weight:600;
+  font-size:clamp(2.8rem,8vw,4.6rem);
+  color:var(--gold);
+  text-shadow:0 0 32px rgba(247,212,161,.35);
+  font-variant-numeric:tabular-nums;
+}
+.counter-note{margin-top:10px;color:var(--muted);font-style:italic}
+
+/* ---------- список цитат ---------- */
+.quotes-list{
+  max-width:760px;margin:56px auto 0;
+  display:flex;flex-direction:column;gap:28px;
+}
+.q-item{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:30px 34px;
+  backdrop-filter:blur(6px);
+}
+.q-item p{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:1.3rem;line-height:1.7;
+}
+.q-item.left{border-left:3px solid var(--rose)}
+.q-item.right{border-right:3px solid var(--rose);text-align:right}
+.q-item .author{
+  display:block;margin-top:14px;
+  font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--gold);
+}
+
+/* ---------- письмо ---------- */
+.letter{
+  max-width:740px;margin:0 auto;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:28px;
+  padding:54px 48px;
+  backdrop-filter:blur(8px);
+  box-shadow:0 24px 60px rgba(0,0,0,.3);
+}
+.letter h3{
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(2.4rem,5vw,3.4rem);
+  color:var(--rose-soft);
+  text-align:center;margin-bottom:28px;
+}
+.letter p{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.28rem;line-height:1.95;
+  margin-bottom:20px;
+}
+.signature{
+  text-align:right;
+  font-family:'Great Vibes',cursive;
+  font-size:2.2rem;color:var(--gold);
+  margin-top:26px;
+}
+
+/* ---------- подвал ---------- */
+footer{
+  position:relative;z-index:2;
+  text-align:center;
+  padding:48px 20px 56px;
+  color:var(--muted);font-size:.9rem;
+}
+footer .fheart-inline{
+  display:inline-block;
+  animation:beat 1.6s ease-in-out infinite;
+  color:var(--rose);font-size:1.05rem;
+}
+footer .made{font-family:'Cormorant Garamond',serif;font-style:italic}
+
+/* ---------- сердечки по клику ---------- */
+.click-heart{
+  position:fixed;z-index:50;
+  pointer-events:none;line-height:1;
+  will-change:transform,opacity;
+}
+
+/* ---------- наши даты ---------- */
+.dates-grid{
+  display:flex;gap:24px;justify-content:center;flex-wrap:wrap;
+  margin-top:56px;
+}
+.date-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:30px 44px;
+  min-width:270px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  backdrop-filter:blur(6px);
+  transition:transform .45s cubic-bezier(.2,.7,.3,1.4),border-color .45s,box-shadow .45s;
+}
+.date-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(255,150,190,.55);
+  box-shadow:0 22px 44px rgba(224,68,124,.22);
+}
+.date-icon{font-size:2.5rem}
+.date-big{
+  font-family:'Cormorant Garamond',serif;font-weight:600;
+  font-size:2.3rem;color:var(--gold);
+}
+.date-small{
+  color:var(--muted);
+  letter-spacing:.14em;text-transform:uppercase;font-size:.76rem;
+}
+.together-label{
+  margin-top:64px;text-align:center;
+  letter-spacing:.3em;text-transform:uppercase;
+  font-size:.75rem;color:var(--muted);
+}
+.together{
+  display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+  margin-top:22px;
+}
+.flip{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  min-width:94px;padding:20px 0;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  font-family:'Cormorant Garamond',serif;font-weight:600;
+  font-size:2.4rem;color:var(--rose-soft);
+  box-shadow:0 14px 30px rgba(0,0,0,.3);
+}
+.flip small{
+  font-family:'Montserrat',sans-serif;font-weight:400;
+  font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* ---------- котики и песни ---------- */
+.cats{
+  display:flex;gap:22px;justify-content:center;
+  margin:44px 0 10px;
+  font-size:clamp(2.6rem,6vw,3.6rem);
+}
+.cats span{display:inline-block;animation:wobble 3s ease-in-out infinite}
+@keyframes wobble{
+  0%,100%{transform:translateY(0) rotate(-7deg)}
+  50%{transform:translateY(-10px) rotate(7deg)}
+}
+.cats-note{
+  text-align:center;color:var(--muted);
+  font-style:italic;margin-bottom:10px;
+}
+.songs{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:24px;max-width:920px;
+  margin:36px auto 0;
+}
+.song-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:34px 34px;
+  backdrop-filter:blur(6px);
+  transition:transform .45s cubic-bezier(.2,.7,.3,1.4),border-color .45s,box-shadow .45s;
+}
+.song-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(255,150,190,.55);
+  box-shadow:0 22px 44px rgba(224,68,124,.22);
+}
+.song-icon{font-size:2rem}
+.song-card h4{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.75rem;margin:12px 0 6px;color:var(--rose-soft);
+}
+.song-artist{
+  display:block;font-size:.72rem;margin-top:2px;
+  letter-spacing:.28em;text-transform:uppercase;color:var(--gold);
+}
+.song-card p{
+  margin-top:18px;
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:1.25rem;line-height:1.95;
+}
+.song-psst{font-size:1.05rem;color:var(--rose-soft)}
+
+/* ---------- обещание ---------- */
+.letter.vow{text-align:center}
+.letter.vow .vow-line{font-size:1.45rem;line-height:2}
+.letter.vow .vow-line.last{
+  font-size:2.1rem;font-weight:600;color:var(--gold);
+}
+
+/* ---------- QR-код ---------- */
+.qr-card{
+  max-width:420px;margin:42px auto 0;
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--border);
+  border-radius:28px;
+  padding:38px 34px;
+  text-align:center;
+  backdrop-filter:blur(8px);
+}
+.qr-card img{
+  display:block;margin:0 auto;
+  width:260px;max-width:100%;
+  background:#fff;padding:10px;
+  border-radius:14px;
+}
+.qr-card p{
+  margin-top:20px;color:var(--muted);font-style:italic;
+}
+
+/* ---------- адаптив ---------- */
+@media (max-width:600px){
+  section{padding:72px 18px}
+  .quote-card{padding:44px 26px}
+  .qmark{font-size:3rem}
+  .letter{padding:40px 26px}
+  .heart-emoji{font-size:110px}
+}
