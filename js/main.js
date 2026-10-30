@@ -10,28 +10,11 @@ AOS.init({
   offset: 90
 });
 
-/* ---------- Имя: буквы появляются одной за другой ---------- */
+/* ---------- Имя «Полина»: буквы появляются одной за другой (анимация в CSS) ---------- */
 const nameEl = document.getElementById('heroName');
 nameEl.innerHTML = [...nameEl.textContent]
-  .map(ch => `<span class="letter"><span class="l-in">${ch}</span></span>`)
+  .map((ch, i) => `<span class="letter" style="--i:${i}"><span class="l-in">${ch}</span></span>`)
   .join('');
-
-const tl = gsap.timeline({ defaults: { ease: 'back.out(1.7)' } });
-tl.from('.letter .l-in', { y: 110, opacity: 0, rotationX: -90, duration: 1.1, stagger: 0.09, delay: 0.3 })
-  .from('.hero-kicker',  { opacity: 0, y: -24, duration: 0.8 }, '-=1.0')
-  .from('.hero-typed',   { opacity: 0, y: 24,  duration: 0.8 }, '-=0.7')
-  .from('.scroll-hint',  { opacity: 0, duration: 1.2 }, '-=0.5');
-
-// лёгкое «дыхание» букв
-gsap.to('.letter .l-in', {
-  y: -7,
-  duration: 1.5,
-  ease: 'sine.inOut',
-  yoyo: true,
-  repeat: -1,
-  stagger: { each: 0.13, repeat: -1, yoyo: true },
-  delay: 1.8
-});
 
 /* ---------- параллакс: герой растворяется при скролле ---------- */
 gsap.registerPlugin(ScrollTrigger);

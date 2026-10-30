@@ -71,20 +71,40 @@ body{
   text-transform:uppercase;letter-spacing:.5em;
   font-size:.78rem;font-weight:500;color:var(--gold);
 }
+/* Имя «Полина» — всегда видимо: золотая база + градиент только если браузер это поддерживает */
 .hero-name{
   font-family:'Great Vibes',cursive;
-  font-size:clamp(4.6rem,15vw,10.5rem);
+  font-size:clamp(4.6rem,16vw,11rem);
   line-height:1.05;
-  background:linear-gradient(90deg,var(--gold) 0%,#ffb6cf 35%,var(--rose) 60%,var(--gold) 100%);
-  background-size:250% 100%;
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;color:transparent;
-  filter:drop-shadow(0 6px 30px rgba(255,122,168,.35));
-  animation:flow 7s linear infinite;
+  color:#ffe3b3;
+  text-shadow:0 2px 26px rgba(255,170,200,.45);
+  animation:nameBob 5s ease-in-out infinite;
+}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .hero-name{
+    background:linear-gradient(90deg,#ffe3b3 0%,#ffb3d1 38%,#ff7aa8 64%,#ffe3b3 100%);
+    background-size:250% 100%;
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    color:transparent;
+    filter:drop-shadow(0 4px 28px rgba(255,140,180,.5));
+    animation:flow 8s linear infinite,nameBob 5s ease-in-out infinite;
+  }
 }
 @keyframes flow{to{background-position:250% 0}}
+@keyframes nameBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .letter{display:inline-block}
-.l-in{display:inline-block;will-change:transform}
+.l-in{
+  display:inline-block;
+  will-change:transform,opacity;
+  animation:letterIn .85s cubic-bezier(.2,.75,.3,1) backwards;
+  animation-delay:calc(.25s + var(--i,0)*.09s);
+}
+@keyframes letterIn{
+  from{opacity:0;transform:translateY(46px)}
+  to{opacity:1;transform:translateY(0)}
+}
 
 .hero-typed{
   font-family:'Cormorant Garamond',serif;
