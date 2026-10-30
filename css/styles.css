@@ -425,26 +425,6 @@ footer .made{font-family:'Cormorant Garamond',serif;font-style:italic}
   font-size:2.1rem;font-weight:600;color:var(--gold);
 }
 
-/* ---------- QR-код ---------- */
-.qr-card{
-  max-width:420px;margin:42px auto 0;
-  background:rgba(255,255,255,.05);
-  border:1px solid var(--border);
-  border-radius:28px;
-  padding:38px 34px;
-  text-align:center;
-  backdrop-filter:blur(8px);
-}
-.qr-card img{
-  display:block;margin:0 auto;
-  width:260px;max-width:100%;
-  background:#fff;padding:10px;
-  border-radius:14px;
-}
-.qr-card p{
-  margin-top:20px;color:var(--muted);font-style:italic;
-}
-
 /* ---------- адаптив ---------- */
 @media (max-width:600px){
   section{padding:72px 18px}
