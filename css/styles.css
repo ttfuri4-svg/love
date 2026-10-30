@@ -72,7 +72,9 @@ body{
   font-size:.78rem;font-weight:500;color:var(--gold);
 }
 /* Имя «Полина»: золотая база (fallback) + градиент на каждой букве.
-   Градиент-клип ставим на саму букву (.l-in), а не на родительский заголовок:
+   Градиент-клип ставим на саму букву (.name-l), а не на родительский заголовок:
+    Классы .name-letter / .name-l — ОТДЕЛЬНО от .letter (карточка письма),
+    чтобы стили карточки (blur/border/padding) не налезали на буквы имени.
    вложенные inline-block + transform ломают background-clip:text на родителе.
    letter-spacing убирает нахлёст букв в курсивном шрифте. */
 .hero-name{
@@ -85,8 +87,8 @@ body{
   color:#ffe3b3;
   animation:nameBob 5s ease-in-out infinite;
 }
-.letter{display:inline-block}
-.l-in{
+.name-letter{display:inline-block}
+.name-l{
   display:inline-block;
   will-change:transform,opacity;
   color:#ffe3b3;
@@ -95,7 +97,7 @@ body{
   animation-delay:calc(.25s + var(--i,0)*.09s);
 }
 @supports ((-webkit-background-clip:text) or (background-clip:text)){
-  .l-in{
+  .name-l{
     background:linear-gradient(90deg,#ffe3b3 0%,#ffb3d1 38%,#ff7aa8 64%,#ffe3b3 100%);
     background-size:250% 100%;
     -webkit-background-clip:text;

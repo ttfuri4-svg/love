@@ -13,7 +13,7 @@ AOS.init({
 /* ---------- Имя «Полина»: буквы появляются одной за другой (анимация в CSS) ---------- */
 const nameEl = document.getElementById('heroName');
 nameEl.innerHTML = [...nameEl.textContent]
-  .map((ch, i) => `<span class="letter" style="--i:${i}"><span class="l-in">${ch}</span></span>`)
+  .map((ch, i) => `<span class="name-letter" style="--i:${i}"><span class="name-l">${ch}</span></span>`)
   .join('');
 
 /* ---------- параллакс: герой растворяется при скролле ---------- */
