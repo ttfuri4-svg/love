@@ -71,37 +71,44 @@ body{
   text-transform:uppercase;letter-spacing:.5em;
   font-size:.78rem;font-weight:500;color:var(--gold);
 }
-/* Имя «Полина» — всегда видимо: золотая база + градиент только если браузер это поддерживает */
+/* Имя «Полина»: золотая база (fallback) + градиент на каждой букве.
+   Градиент-клип ставим на саму букву (.l-in), а не на родительский заголовок:
+   вложенные inline-block + transform ломают background-clip:text на родителе.
+   letter-spacing убирает нахлёст букв в курсивном шрифте. */
 .hero-name{
   font-family:'Dancing Script',cursive;
   font-weight:600;
-  font-size:clamp(5rem,18vw,12.5rem);
-  line-height:1.15;
+  font-size:clamp(4.6rem,16vw,11.5rem);
+  line-height:1.2;
+  letter-spacing:.04em;
+  white-space:nowrap;
   color:#ffe3b3;
-  text-shadow:0 2px 26px rgba(255,170,200,.45);
   animation:nameBob 5s ease-in-out infinite;
 }
+.letter{display:inline-block}
+.l-in{
+  display:inline-block;
+  will-change:transform,opacity;
+  color:#ffe3b3;
+  text-shadow:0 2px 26px rgba(255,170,200,.55);
+  animation:letterIn .85s cubic-bezier(.2,.75,.3,1) backwards;
+  animation-delay:calc(.25s + var(--i,0)*.09s);
+}
 @supports ((-webkit-background-clip:text) or (background-clip:text)){
-  .hero-name{
+  .l-in{
     background:linear-gradient(90deg,#ffe3b3 0%,#ffb3d1 38%,#ff7aa8 64%,#ffe3b3 100%);
     background-size:250% 100%;
     -webkit-background-clip:text;
     background-clip:text;
     -webkit-text-fill-color:transparent;
     color:transparent;
-    filter:drop-shadow(0 4px 28px rgba(255,140,180,.5));
-    animation:flow 8s linear infinite,nameBob 5s ease-in-out infinite;
+    animation:letterIn .85s cubic-bezier(.2,.75,.3,1) backwards,
+              flow 8s linear infinite;
+    animation-delay:calc(.25s + var(--i,0)*.09s),0s;
   }
 }
 @keyframes flow{to{background-position:250% 0}}
 @keyframes nameBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.letter{display:inline-block}
-.l-in{
-  display:inline-block;
-  will-change:transform,opacity;
-  animation:letterIn .85s cubic-bezier(.2,.75,.3,1) backwards;
-  animation-delay:calc(.25s + var(--i,0)*.09s);
-}
 @keyframes letterIn{
   from{opacity:0;transform:translateY(46px)}
   to{opacity:1;transform:translateY(0)}
