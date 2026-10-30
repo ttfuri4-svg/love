@@ -80,7 +80,7 @@ body{
 .hero-name{
   font-family:'Dancing Script',cursive;
   font-weight:600;
-  font-size:clamp(4.6rem,16vw,11.5rem);
+  font-size:clamp(4rem,15vw,10.5rem);
   line-height:1.2;
   letter-spacing:.04em;
   white-space:nowrap;
